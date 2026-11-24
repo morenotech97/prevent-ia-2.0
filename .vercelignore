@@ -1,0 +1,26 @@
+# Dependencias
+node_modules/
+
+# Claves: NUNCA subir (se configuran en Vercel > Settings > Environment Variables)
+.env
+.env.*
+!.env.example
+
+# Material de trabajo que ya está en Supabase o es de respaldo (no forma parte de la app)
+originales/
+traducciones/
+preguntas/
+prueba_traduccion/
+supabase_carga/
+_respaldos/
+*.zip
+
+# Restos de Google AI Studio / otros gestores
+.aistudio/
+metadata.json
+bun.lock
+
+# Vercel y sistema
+.vercel/
+.DS_Store
+Thumbs.db
