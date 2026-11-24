@@ -83,3 +83,63 @@ h1,h2,h3,.logo{font-family:'Chakra Petch','Plus Jakarta Sans',sans-serif}.card{b
 @keyframes spin{to{transform:rotate(360deg)}}
 /* firmas (prevencionista) */
 .sgth{width:110px;height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;flex:none}
+
+/* ===== Vista móvil (solo pantallas de hasta 700 px; la vista de PC no cambia) ===== */
+.pvpage canvas{border:0;border-radius:0}            /* el PDF heredaba el borde punteado del panel de firma */
+:has(>.dhm){overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:700px){
+  /* botones: nunca partir el texto en varias líneas (salvo las alternativas de la evaluación) */
+  button:not(.opt):not(.rk),.btnl,.fbtn{white-space:nowrap;min-height:44px}
+  /* filas con título + botones: el contenido ocupa todo el ancho y los botones bajan a su propia línea */
+  .row{flex-wrap:wrap;row-gap:10px}
+  .row>:first-child{flex:1 1 200px;min-width:0}
+  .row>span:last-child:has(>button),.row>.dxb{flex:1 1 auto;display:flex;gap:8px;justify-content:flex-end}
+  .row>button:last-child{display:inline-flex;align-items:center;justify-content:center}
+  .dxb{width:100%;justify-content:stretch!important;flex-wrap:nowrap}
+  .dxb>button{flex:1 1 0;padding:10px 6px;min-width:0}
+  .row>button:last-child{flex:0 0 auto}
+  /* botón "Leer y firmar" de la lista de documentos del trabajador: a lo ancho bajo el título */
+  .card .row>button:only-of-type{flex:1 1 100%}
+  /* selector de idioma: una sola fila deslizable, más compacta */
+  .top .lang,.lang{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-4px;padding:2px 4px}
+  .lang::-webkit-scrollbar{display:none}
+  .lang button{min-height:36px;flex:none}
+  /* menú: barra inferior fija con ícono arriba y nombre abajo, como en las apps */
+  aside{position:fixed!important;top:auto!important;bottom:0;left:0;right:0;z-index:8;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))!important;border-top:1px solid var(--line);border-bottom:0!important;overflow-x:auto;scrollbar-width:none;justify-content:flex-start}
+  aside::-webkit-scrollbar{display:none}
+  aside nav{width:100%;gap:2px!important}
+  aside nav button{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1 0 56px;min-height:52px;padding:6px 4px!important;border-radius:14px;font-size:11px;line-height:1.1;margin:0!important}
+  aside nav button .ni{font-size:20px;line-height:1}
+  aside nav .avn{display:none}
+  main{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  /* ventanas: hoja que sube desde abajo, aprovechando el ancho */
+  .modal{padding:0;align-items:flex-end}
+  .modal>div{border-radius:22px 22px 0 0;max-height:94dvh;padding:18px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+  .modal>div:has(.pvw){height:100dvh;max-height:100dvh;border-radius:0;padding:12px 10px calc(10px + env(safe-area-inset-bottom,0px))}
+  .pv{padding:4px;border-radius:8px}
+  .pvpage{margin-bottom:8px}
+  /* barras de botones al pie de las ventanas (Cerrar / Evaluación / Descargar…) */
+  .sticky{flex-wrap:wrap;bottom:calc(-16px - env(safe-area-inset-bottom,0px));padding-bottom:6px}
+  .sticky>*{flex:1 1 auto;text-align:center;justify-content:center}
+  .modal>div>div[style*="display:flex"]{flex-wrap:wrap}
+  .modal>div>div[style*="display:flex"]>button{flex:1 1 auto}
+  /* firmas del prevencionista: imagen más chica */
+  .sgth{width:84px;height:40px}
+  /* sin efecto "hover pegado" al tocar */
+  aside nav button:hover:not(.on){background:transparent;color:var(--mut)}
+  .top h2{font-size:22px}
+}
+
+/* ===== menú superior en PC: compacto y deslizable para que ninguna pestaña quede fuera de la pantalla ===== */
+@media(min-width:701px){
+  aside{gap:12px}
+  aside nav{flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:thin}
+  aside nav button{padding:8px 11px;font-size:15px;flex:none}
+}
+@media(min-width:701px) and (max-width:1180px){
+  aside nav{flex-wrap:wrap;overflow:visible;row-gap:2px}
+  aside nav button{padding:6px 9px;font-size:14px}
+}
+/* los botones de las filas nunca parten su texto (en PC ancho ya caben en una línea, así que ahí no cambia nada) */
+.row>button,.row>span>button,.dxb>button{white-space:nowrap}
