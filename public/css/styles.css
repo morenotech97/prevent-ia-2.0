@@ -143,3 +143,23 @@ h1,h2,h3,.logo{font-family:'Chakra Petch','Plus Jakarta Sans',sans-serif}.card{b
 }
 /* los botones de las filas nunca parten su texto (en PC ancho ya caben en una línea, así que ahí no cambia nada) */
 .row>button,.row>span>button,.dxb>button{white-space:nowrap}
+
+/* ===== ingreso, buzón y perfil en celular ===== */
+.mlogo{display:none}
+@media(max-width:860px){
+  .mlogo{display:block;margin:0 0 14px;font-size:26px;text-align:center;width:100%}
+  .form{flex-direction:column}
+  .lcol>.logo{display:none}
+}
+@media(max-width:700px){
+  /* Buzón y Mi perfil forzaban 2 columnas: en celular, una sola */
+  .grid[style*="1fr 1fr"]{grid-template-columns:1fr!important}
+  /* botón principal de cada formulario a lo ancho */
+  form.card>button,.card>button:last-child{width:100%}
+  /* botones de emergencia (131, 132, 133): repartidos en la fila */
+  .card>p:has(>a.btnl){display:flex;gap:8px;flex-wrap:wrap}
+  .card>p>a.btnl{flex:1 1 0;text-align:center;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  /* contactos de emergencia: nombre arriba; llamar y quitar abajo */
+  .row>span:last-child:has(>a.btnl){display:flex;gap:8px;flex:1 1 100%}
+  .row>span:last-child>a.btnl{flex:1;text-align:center;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+}
